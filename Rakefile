@@ -24,8 +24,8 @@ require 'spec/rake/spectask'
   s.files = FileList['lib/**/*.*', 'README', 'doc/**/*.*', 'bin/**/*.*']
   s.require_paths << 'lib'
 
-  #s.bindir = "bin"
-  #s.executables << "gemfreezer"
+  s.bindir = "bin"
+  s.executables << "gemfreezer"
   #s.default_executable = ""
   #s.add_dependency("", "")
   #s.add_dependency("", "")

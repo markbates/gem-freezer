@@ -1,0 +1,33 @@
+#!/usr/local/bin/ruby
+
+require 'optparse'
+require 'optparse/time'
+require 'ostruct'
+require 'fileutils'
+require File.join(File.dirname(__FILE__), '..', 'lib', 'gemfreezer')
+
+options = OpenStruct.new
+options.directory = FileUtils.pwd
+options.freeze_directory = File.join(options.directory, 'frozen_gems')
+options.gems_list = File.join(options.directory, 'gems.txt')
+
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: gemfreezer [options]"
+  
+  opts.on("-d [DIRECTORY]") do |v|
+    options.directory = v
+  end
+  
+  opts.on("-f [FREEZE DIRECTORY]") do |v|
+    options.freeze_directory = v
+  end
+  
+  opts.on("-g [GEMS_LIST_FILE]") do |v|
+    options.gems_list = v
+  end
+  
+end
+
+opts.parse!(ARGV)
+
+GemFreezer.run(options)
