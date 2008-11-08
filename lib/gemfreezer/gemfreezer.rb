@@ -8,10 +8,11 @@ module GemFreezer
       self.dependencies(gem)
     end
     @dependencies.uniq!
+    FileUtils.rm_rf(options.freeze_directory)
+    FileUtils.mkdir_p(options.freeze_directory)
     @dependencies.each do |spec|
       gem_name = "#{spec.name}-#{spec.version}"
       src = File.join(Gem.dir, 'cache', "#{gem_name}.gem")
-      FileUtils.mkdir_p(options.freeze_directory)
       Gem::Installer.new(src).unpack(File.join(options.freeze_directory, gem_name))
     end
   end

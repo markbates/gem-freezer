@@ -10,7 +10,7 @@ module GemFreezer
     
     def initialize(options = {})
       self.directory = options[:directory] ||= FileUtils.pwd
-      self.freeze_directory = options[:freeze_directory] ||= File.join(self.directory, 'frozen_gems')
+      self.freeze_directory = options[:freeze_directory] ||= File.join(self.directory, 'gems')
       self.gems_list_file = options[:gems_list_file] ||= File.join(self.directory, 'gems.txt')
       self.gems_list = options[:gems_list] || []
       if self.gems_list.empty?
