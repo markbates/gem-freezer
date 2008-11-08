@@ -6,10 +6,7 @@ require 'ostruct'
 require 'fileutils'
 require File.join(File.dirname(__FILE__), '..', 'lib', 'gemfreezer')
 
-options = OpenStruct.new
-options.directory = FileUtils.pwd
-options.freeze_directory = File.join(options.directory, 'frozen_gems')
-options.gems_list = File.join(options.directory, 'gems.txt')
+options = GemFreezer::Options.new
 
 opts = OptionParser.new do |opts|
   opts.banner = "Usage: gemfreezer [options]"
@@ -23,7 +20,7 @@ opts = OptionParser.new do |opts|
   end
   
   opts.on("-g [GEMS_LIST_FILE]") do |v|
-    options.gems_list = v
+    options.gems_list_file = v
   end
   
 end
