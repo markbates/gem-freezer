@@ -6,10 +6,14 @@ describe GemFreezer::Options do
     lambda{GemFreezer::Options.new}.should raise_error(GemFreezer::Errors::UndefinedGemDependencies)
   end
   
-  it 'should build a gem list from a gems.txt file, if no gems list is given'
+  it 'should build a gem list from a gems.txt file, if no gems list is given' do
+    options = GemFreezer::Options.new(:gems_list_file => File.join(File.dirname(__FILE__), '..', 'gems.txt'))
+    options.gems_list.should == [['rake', nil], ['english', '0.2.0']]
+  end
   
-  it 'should use a gems_list attribute if given and ignore the gems.txt file'
-  
-  it 'should specify the latest version of the gem if none is given.'
+  it 'should use a gems_list attribute if given and ignore the gems.txt file' do
+    options = GemFreezer::Options.new(:gems_list_file => File.join(File.dirname(__FILE__), '..', 'gems.txt'), :gems_list => [['mack', '0.8.1']])
+    options.gems_list.should == [['mack', '0.8.1']]
+  end
 
 end
